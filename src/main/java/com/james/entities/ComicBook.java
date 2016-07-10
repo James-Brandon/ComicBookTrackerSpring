@@ -14,6 +14,12 @@ public class ComicBook {
     int id;
 
     @Column
+    String comicName;
+
+    @Column
+    String comment;
+
+    @Column
     String filename;
 
     @Column
@@ -25,10 +31,28 @@ public class ComicBook {
     public ComicBook() {
     }
 
-    public ComicBook(String filename, int likes, User user) {
+    public ComicBook(String comicName, String comment, String filename, int likes, User user) {
+        this.comicName = comicName;
+        this.comment = comment;
         this.filename = filename;
         this.likes = likes;
         this.user = user;
+    }
+
+    public String getComicName() {
+        return comicName;
+    }
+
+    public void setComicName(String comicName) {
+        this.comicName = comicName;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public int getId() {
