@@ -5,7 +5,6 @@
   angular
     .module('app')
     .controller('mainController', ["$scope", "mainService", function($scope, mainService){
-      console.log("hello");
 
       $scope.hello = "Hello World";
       $scope.likes = 10;
@@ -18,8 +17,6 @@
       }
 
       $scope.comicCollection = mainService.getComics();
-      console.log($scope.comicCollection);
-
       $scope.incLikes = function(comic){
         mainService.incLikes(comic);
       }

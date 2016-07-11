@@ -5,7 +5,6 @@
       'ngRoute',
     ])
     .config(function($routeProvider){
-      console.log("here");
         $routeProvider
           .when('/',{
             templateUrl:'views/home.html',

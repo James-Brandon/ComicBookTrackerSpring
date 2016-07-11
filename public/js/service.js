@@ -40,8 +40,8 @@
           return comicCollection;
         }
 
-        incLikes = function(comic){
-
+        var incLikes = function(comic){
+          comicCollection[comicCollection.indexOf(comic)].likes++;
         }
 
         return {
