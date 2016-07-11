@@ -28,7 +28,7 @@
 
 
         var login = function(user, pass){
-          return $http.post('/login', {username: user, password: pass})
+          return $http.post('/login', {name: user, password: pass})
         }
 
         var getComics = function(){
