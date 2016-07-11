@@ -31,11 +31,10 @@ public class ComicBook {
     public ComicBook() {
     }
 
-    public ComicBook(String comicName, String comment, String filename, int likes, User user) {
+    public ComicBook(String comicName, String comment, String filename, User user) {
         this.comicName = comicName;
         this.comment = comment;
         this.filename = filename;
-        this.likes = likes;
         this.user = user;
     }
 

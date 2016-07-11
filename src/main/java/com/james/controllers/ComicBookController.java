@@ -13,8 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 
 
@@ -23,7 +29,7 @@ import java.sql.SQLException;
  */
 @RestController
 public class ComicBookController {
-
+    public static String IMG_DIR = "images";
 
     @Autowired
     UserRepository users;
@@ -44,8 +50,33 @@ public class ComicBookController {
         return comics.findAll();
     }
 
+    @RequestMapping(path = "/comics", method = RequestMethod.POST)
+    public void newComic(HttpSession session, MultipartFile img, String comicName, String comment, HttpServletResponse response) throws Exception {
+        String username = (String) session.getAttribute("username");
+
+        if (username == null) {
+            throw new Exception("You must be logged in");
+        }
+        User existingUser = users.findByName(username);
+        if (existingUser == null) {
+            throw new Exception("User does not exist");
+        }
+
+        File dir = new File("public/" + IMG_DIR);
+        dir.mkdirs();
+
+        File imgfile = File.createTempFile("image", img.getOriginalFilename(), dir);
+        FileOutputStream fos = new FileOutputStream(imgfile);
+        fos.write(img.getBytes());
+
+        ComicBook comic = new ComicBook(imgfile.getName(), comicName, comment, existingUser);
+        comics.save(comic);
+
+        response.sendRedirect("/#/home");
+    }
+
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public String newUser(HttpSession session, @RequestBody User user) throws Exception {
+    public void newUser(HttpSession session, @RequestBody User user) throws Exception {
         User userInDb = users.findByName(user.getName());
         if (userInDb == null) {
             user.setPassword(PasswordStorage.createHash(user.getPassword()));
@@ -56,7 +87,6 @@ public class ComicBookController {
         }
 
         session.setAttribute("username", user.getName());
-        return user.getName();
     }
 
 
