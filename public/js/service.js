@@ -40,9 +40,14 @@
           return comicCollection;
         }
 
+        incLikes = function(comic){
+
+        }
+
         return {
           login: login,
-          getComics: getComics
+          getComics: getComics,
+          incLikes: incLikes
         }
       }])
 }());

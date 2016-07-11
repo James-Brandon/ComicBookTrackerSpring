@@ -21,7 +21,7 @@
       console.log($scope.comicCollection);
 
       $scope.incLikes = function(comic){
-        console.log(comic);
+        mainService.incLikes(comic);
       }
 
   }])
