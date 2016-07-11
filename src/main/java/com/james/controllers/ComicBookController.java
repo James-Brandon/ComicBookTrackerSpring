@@ -45,7 +45,7 @@ public class ComicBookController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public void newUser(HttpSession session, @RequestBody User user) throws Exception {
+    public String newUser(HttpSession session, @RequestBody User user) throws Exception {
         User userInDb = users.findByName(user.getName());
         if (userInDb == null) {
             user.setPassword(PasswordStorage.createHash(user.getPassword()));
@@ -56,6 +56,7 @@ public class ComicBookController {
         }
 
         session.setAttribute("username", user.getName());
+        return user.getName();
     }
 
 
