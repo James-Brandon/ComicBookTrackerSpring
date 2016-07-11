@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box; }
+
+aside {
+  width: 30%;
+  display: inline-block;
+  padding: 25px;
+  vertical-align: top; }
+
+section {
+  width: 65%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: top; }
+
+.user-comics {
+  text-align: center;
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 20px 20px; }
+  .user-comics img {
+    max-height: 200px;
+    margin: 0 auto; }
+  .user-comics .comic-title {
+    font-weight: bold;
+    font-size: 1.2em; }
+  .user-comics .up-voting {
+    margin-right: 10px; }
+  .user-comics .blurb {
+    max-height: 100px;
+    overflow: scroll; }

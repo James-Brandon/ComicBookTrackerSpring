@@ -16,3 +16,20 @@
     </form>
   </div>
 </aside>
+<section>
+  <h2>Comics</h2>
+  <div class="user-comics" ng-repeat="comic in comicCollection">
+    <img ng-src="{{comic.img}}" alt="" class="thumbnail img-responsive">
+    <span class="comic-title">{{comic.title}}</span>
+    <br>
+    by <span>{{comic.uploader}}</span>
+    <div class="likes">
+       <i class="fa fa-thumbs-o-up up-voting" aria-hidden="true" ng-click="incLikes(comic.index)"></i>{{comic.likes}}
+    </div>
+    <div class="blurb">
+      <p>
+        {{comic.blurb}}
+      </p>
+      </div>
+  </div>
+</section>

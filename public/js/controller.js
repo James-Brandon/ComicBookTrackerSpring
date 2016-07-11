@@ -8,11 +8,20 @@
       console.log("hello");
 
       $scope.hello = "Hello World";
+      $scope.likes = 10;
+      $scope.title = "PHILL MURRAY"
 
       $scope.login = function(){
-        var userName = $scope.user;
-        var password = $scope.pass;
-        console.log(userName, password);
+        mainService.login($scope.user, $scope.pass).then(function(data){
+          console.log(data);
+        })
+      }
+
+      $scope.comicCollection = mainService.getComics();
+      console.log($scope.comicCollection);
+
+      $scope.incLikes = function(comic){
+        console.log(comic);
       }
 
   }])
