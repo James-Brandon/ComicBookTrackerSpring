@@ -9,6 +9,10 @@
           .when('/',{
             templateUrl:'views/home.html',
             controller:'mainController as mainCTRL'
-          });
+          })
+          .when('/home', {
+            templateUrl:'views/mycollection.html',
+            controller:'userController as userCTRL'
+          })
         });
 }());
