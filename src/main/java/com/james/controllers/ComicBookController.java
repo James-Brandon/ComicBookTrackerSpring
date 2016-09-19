@@ -1,6 +1,7 @@
 package com.james.controllers;
 
 import com.james.entities.ComicBook;
+import com.james.entities.Like;
 import com.james.entities.User;
 import com.james.services.ComicBookRepository;
 import com.james.services.LikeRepository;
@@ -8,7 +9,6 @@ import com.james.services.UserRepository;
 import com.james.utils.PasswordStorage;
 import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.sql.SQLException;
 
 
@@ -89,5 +88,15 @@ public class ComicBookController {
         session.setAttribute("username", user.getName());
     }
 
+    @RequestMapping(path = "/likes", method = RequestMethod.POST)
+    public void newLike(HttpSession session, @RequestBody Like like) {
+        String username = (String) session.getAttribute("username");
 
+        ComicBook cmcbk = comics.findOne(like.getComicBookId());
+        cmcbk.setLikes(cmcbk.getLikes() + (like.isLiked() ? 1 : -1));
+        comics.save(cmcbk);
+
+        likes.save(like);
+
+    }
 }
