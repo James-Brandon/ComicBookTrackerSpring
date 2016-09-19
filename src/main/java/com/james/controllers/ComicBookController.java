@@ -99,6 +99,4 @@ public class ComicBookController {
         likes.save(like);
 
     }
-
-
 }
